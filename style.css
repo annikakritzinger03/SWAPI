@@ -28,7 +28,10 @@ body{
     grid-template-rows: repeat(5, minmax(50px, auto));
     text-align: center;
 }
-
+option:checked {
+    background-color: black;
+    color: #e6e60d;
+}
 #left-selection{
     grid-column: 1;
     grid-row: 2;
@@ -106,6 +109,7 @@ h1{
     font-weight: bold;
 }
 #result{
+    display: block;
     width: 700px;
     height: 34px;
     background-color: #C4C517;
