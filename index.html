@@ -3,14 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SWAPI</title>
+    <link rel="stylesheet" href="style.css">
+    <title>SW Character Comparison Tool</title>
 </head>
 <body>
     <script src="script.js" async></script>
-    <div>
-        <p id="name"></p>
-        <p id="gender"></p>
-        <p id="height"></p>
-    </div>
+    <article class="heading">   
+        <section id="sw">
+            <img id="logo" src="images/Star_Wars_Logo.svg.png" alt="Star Wars logo">
+        </section>
+        <section id="title">
+            <h1>CHARACTER COMPARISON TOOL</h1>
+        </section>
+    </article> 
+
+    <article class="form">     
+        <section id="left-selection">
+            <select id="character1" class="dropDown">
+                <option class="options" value="1">LUKE SKYWALKER</option>
+                <option class="options" value="2">C-3PO</option>
+                <option class="options" value="3">R2-D2</option>
+                <option class="options" value="4">DARTH VADER</option>
+                <option class="options" value="5">LEIA ORGANA</option>
+                <option class="options" value="10">OBI-WAN KENOBI</option>
+                <option class="options" value="13">CHEWBACCA</option>
+                <option class="options" value="14">HAN SOLO</option>
+                <option class="options" value="16">JABBA DESILIJIC TIURE</option>
+                <option class="options" value="20">YODA</option>    
+                <option class="options" value="36">JAR JAR BINKS</option>
+            </select>  
+        </section>
+        <div id="display1" class="display">
+            <p id="height1p" class="attributes">Height: 
+                <input type="text" id="height1" placeholder="Height (cm)">
+            </p>
+            <p id="mass1p" class="attributes">Mass: 
+                <input type="text" id="mass1" placeholder="Mass (lb)">
+            </p>
+            <p id="species1p" class="attributes">Species: 
+                <input type="text" id="species1" placeholder="Species">
+            </p>
+            <p id="training1p" class="attributes">Training Level: 
+                <input type="text" id="training1" placeholder="Training Level">
+            </p>
+            <p id="weapon1p" class="attributes">Weapon: 
+                <input type="text" id="weapon1" placeholder="Weapon of Choice">
+            </p>
+            <p id="skill1p" class="attributes">Special Skill: 
+                <input type="text" id="skill1" placeholder="Special Skill">
+            </p>     
+        </div>
+
+        <section id="right-selection">
+            <select id="character2" class="dropDown">
+                <option class="options" value="1">LUKE SKYWALKER</option>
+                <option class="options" value="2">C-3PO</option>
+                <option class="options" value="3">R2-D2</option>
+                <option class="options" value="4">DARTH VADER</option>
+                <option class="options" value="5">LEIA ORGANA</option>
+                <option class="options" value="10">OBI-WAN KENOBI</option>
+                <option class="options" value="13">CHEWBACCA</option>
+                <option class="options" value="14">HAN SOLO</option>
+                <option class="options" value="16">JABBA DESILIJIC TIURE</option>
+                <option class="options" value="20">YODA</option>    
+                <option class="options" value="36">JAR JAR BINKS</option>
+            </select>
+        </section>
+        <div id="display2" class="display">
+            <p id="height2p" class="attributes">Height: 
+                <input type="text" id="height2" placeholder="Height (cm)">
+            </p>
+            <p id="mass2p" class="attributes">Mass: 
+                <input type="text" id="mass2" placeholder="Mass (lb)">
+            </p>
+            <p id="species2p" class="attributes">Species: 
+                <input type="text" id="species2" placeholder="Species">
+            </p>
+            <p id="training2p" class="attributes">Training Level: 
+                <input type="text" id="training2" placeholder="Training Level">
+            </p>
+            <p id="weapon2p" class="attributes">Weapon: 
+                <input type="text" id="weapon2" placeholder="Weapon of Choice">
+            </p>
+            <p id="skill2p" class="attributes">Special Skill: 
+                <input type="text" id="skill2" placeholder="Special Skill">
+            </p>     
+        </div>
+
+        <section id="comparebtn">
+            <button type="submit" id="compare" onclick="Compare()">COMPARE</button>
+        </section>
+        <section id="comparelbl">
+            <label id="result"></label>
+        </section>    
+    </article>
+    
 </body>
 </html>
