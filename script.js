@@ -134,6 +134,10 @@ async function Compare()
     document.getElementById("result1").innerHTML = "SCORE:  " + char1Score;
     document.getElementById("result2").innerHTML = "SCORE:  " + char2Score;
 
+    //icons from behance.net by Travis Pietsch --> https://www.behance.net/gallery/32367153/Star-Wars-Icons
+    document.getElementById("logo1").src = `images/CharacterLogos/${selectedChar1.value}.png`;
+    document.getElementById("logo2").src = `images/CharacterLogos/${selectedChar2.value}.png`;
+
     await FormatResults();
     
     let winner = (char1Score > char2Score) ? selectedOption1 : selectedOption2;
