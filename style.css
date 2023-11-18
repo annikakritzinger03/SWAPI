@@ -6,7 +6,7 @@ body{
 }
 .heading{
     display: grid;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: 3fr 5fr;
     grid-template-rows: 50px 50px;
     column-gap: 30px;
 }
@@ -24,7 +24,7 @@ body{
     display: grid;
     place-items: center;
     grid-template-columns: repeat(2, minmax(500px, auto));
-    row-gap: 30px;
+    row-gap: 20px;
     grid-template-rows: repeat(5, minmax(50px, auto));
     text-align: center;
 }
@@ -55,7 +55,7 @@ body{
 }
 #logo{
     height: 160px;
-    width: 190px;
+    width: 210px;
     opacity: 0.6;
 }
 h1{

@@ -19,42 +19,42 @@ async function Compare()
     }); 
 }
 
-function GetData(URL){
-    return new Promise((resolve, reject) => {
-        let height = document.getElementById("height1");
-        let mass = document.getElementById("mass1");
-        let species = document.getElementById("species1");
-    
-        fetch(URL).then((response) => {
-            return response.json();
-        }).then((data) => {
-            //Can query the entire object or just specific parts of it
-            height.value = data.height;
-            mass.value = data.mass;
-            console.log(data);
+async function GetData(URL){
+    let height = document.getElementById("height1");
+    let mass = document.getElementById("mass1");
+    let species = document.getElementById("species1");
 
-            const species = data.species;
-            GetSpecies(species);
-        })
+    fetch(URL)
+    .then((response) => {
+        if(!response.ok) throw new Error(response.statusText);
+        return response.json();
+    }).then(async (data) => {
+        //Can query the entire object or just specific parts of it
+        height.value = data.height;
+        mass.value = data.mass;
+        console.log(data);
 
-        setTimeout(() => {
-            resolve();
-        })
-    }, 2000);  
+        const species = data.species;
+        await GetSpecies(species) .then(() => {
+            console.log("testing...");
+        });
+    }).catch(console.error);
 }
 
-function GetSpecies(speciesURL){
+async function GetSpecies(speciesURL){
     let species = document.getElementById("species1");
 
     if(speciesURL.length == 0){
         species.value = "Human";
     }
     else{         
-        fetch(speciesURL).then((speciesResponse) => {
+        fetch(speciesURL)
+        .then((speciesResponse) => {
+            if(!speciesResponse.ok) throw new Error(speciesResponse.statusText);
             return speciesResponse.json();
         }).then((speciesData) => {
             console.log(speciesData);
             species.value = speciesData.name;
-        })
+        }).catch(console.error);
     }
 }
