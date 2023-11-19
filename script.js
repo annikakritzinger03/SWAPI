@@ -2,6 +2,12 @@
 //All species --> https://swapi.dev/api/species
 //More information --> https://swapi.dev/documentation
 
+//Default display settings
+document.getElementById("character1").value = 1;
+document.getElementById("character2").value = 2;
+document.getElementById("logo1").src = `images/CharacterLogos/1.png`;
+ document.getElementById("logo2").src = `images/CharacterLogos/2.png`;
+
 class Character{
     constructor(name, height, mass, species){
         this.name = name;
@@ -142,8 +148,14 @@ async function Compare()
     document.getElementById("logo1").src = `images/CharacterLogos/${selectedOption1.value}.png`;
     document.getElementById("logo2").src = `images/CharacterLogos/${selectedOption2.value}.png`;
 
-    let winner = (char1Score > char2Score) ? selectedOption1 : selectedOption2;
-    document.getElementById("result").innerHTML = `${winner.innerHTML} WILL WIN IN BATTLE!`;
+    let winner;
+    if(char1Score == char2Score){
+        document.getElementById("result").innerHTML = `IT'S A TIE!`;
+    }
+    else{
+        winner = (char1Score > char2Score) ? selectedOption1 : selectedOption2;
+        document.getElementById("result").innerHTML = `${winner.innerHTML} WILL WIN IN BATTLE!`;
+    }
 }
 
 async function GetCharacterScore(selectedOption, charNum){
@@ -231,19 +243,12 @@ async function GetCharacterScore(selectedOption, charNum){
     document.getElementById(`result${charNum}`).innerHTML = "SCORE:  " + character.score;
 
     //Displaying all character attributes in text boxes
-    let height = document.getElementById(`height${charNum}`);
-    let mass = document.getElementById(`mass${charNum}`);
-    let species = document.getElementById(`species${charNum}`);
-    let trainingLvl = document.getElementById(`training${charNum}`);
-    let weapon = document.getElementById(`weapon${charNum}`);
-    let skill = document.getElementById(`skill${charNum}`);
-
-    height.value = character.height;
-    mass.value = character.mass;
-    species.value = getKeyByValue(speciesList, character.species);
-    trainingLvl.value = getKeyByValue(trainingLevels, character.trainingLvl);
-    weapon.value = getKeyByValue(weapons,character.weapon);
-    skill.value = getKeyByValue(skills,character.skill);
+    document.getElementById(`height${charNum}`).value = character.height;
+    document.getElementById(`mass${charNum}`).value = character.mass;
+    document.getElementById(`species${charNum}`).value = getKeyByValue(speciesList, character.species);
+    document.getElementById(`training${charNum}`).value = getKeyByValue(trainingLevels, character.trainingLvl);
+    document.getElementById(`weapon${charNum}`).value = getKeyByValue(weapons,character.weapon);
+    document.getElementById(`skill${charNum}`).value = getKeyByValue(skills,character.skill);
   
     return character.score;
 }
