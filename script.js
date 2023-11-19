@@ -1,6 +1,6 @@
 //All people --> https://swapi.dev/api/people
 //All species --> https://swapi.dev/api/species
-//More info --> https://swapi.dev/documentation
+//More information --> https://swapi.dev/documentation
 
 class Character{
     constructor(name, height, mass, species){
@@ -16,12 +16,14 @@ class Character{
         this.score = 0;
     }
 
+    //While height and mass are compared, they do not count toward the character score
     CalculateScore(){
         this.score = parseInt(this.species) + parseInt(this.trainingLvl) + 
             parseInt(this.weapon) + parseInt(this.skill);
     }
 }
 
+//Dictionaries to indicate the individual attribute scores
 const trainingLevels = {
     "Sith Lord" : 10,
     "Jedi Master" : 9,
@@ -71,6 +73,7 @@ function getKeyByValue(object, value){
     return Object.keys(object).find(key => object[key] === value);
 }
 
+//Comparing attributes and displaying the paragraph border in red/green/blue
 function ShowAttributeComparison(value1, value2, component1, component2){
     if(value1 > value2){
         component1.style = "border: 8px solid rgb(34, 155, 34)";
@@ -86,6 +89,7 @@ function ShowAttributeComparison(value1, value2, component1, component2){
     }
 }
 
+//Using ShowAttributeComparison for all 6 attributes
 async function FormatResults(){
     ShowAttributeComparison(parseInt(document.getElementById("height1").value), 
         parseInt(document.getElementById("height2").value), 
@@ -118,6 +122,7 @@ async function FormatResults(){
         document.getElementById("skill2p"));
 }
 
+//Function called by compare button
 async function Compare()
 {
     const selectedChar1 = document.getElementById("character1");
@@ -131,15 +136,12 @@ async function Compare()
 
     const char1Score = await GetCharacterScore(selectedOption1, 1);
     const char2Score = await GetCharacterScore(selectedOption2, 2);
-    document.getElementById("result1").innerHTML = "SCORE:  " + char1Score;
-    document.getElementById("result2").innerHTML = "SCORE:  " + char2Score;
-
-    //icons from behance.net by Travis Pietsch --> https://www.behance.net/gallery/32367153/Star-Wars-Icons
-    document.getElementById("logo1").src = `images/CharacterLogos/${selectedChar1.value}.png`;
-    document.getElementById("logo2").src = `images/CharacterLogos/${selectedChar2.value}.png`;
 
     await FormatResults();
-    
+    //icons from behance.net by Travis Pietsch --> https://www.behance.net/gallery/32367153/Star-Wars-Icons
+    document.getElementById("logo1").src = `images/CharacterLogos/${selectedOption1.value}.png`;
+    document.getElementById("logo2").src = `images/CharacterLogos/${selectedOption2.value}.png`;
+
     let winner = (char1Score > char2Score) ? selectedOption1 : selectedOption2;
     document.getElementById("result").innerHTML = `${winner.innerHTML} WILL WIN IN BATTLE!`;
 }
@@ -148,10 +150,13 @@ async function GetCharacterScore(selectedOption, charNum){
     let person = selectedOption.value;
     let request = `https://swapi.dev/api/people/${person}/`;
 
+    //Character object with name, height, mass, species
     let character = await GetData(request, charNum);
 
+    //Populating the next 3 attributes by using the dictionaries
     switch(character.name){
         case "Luke Skywalker":
+            //Changing the species from name to number for easier comparison
             character.species = speciesList[character.species];
             character.trainingLvl = trainingLevels["Jedi Knight"];
             character.weapon = weapons.Lightsaber;
@@ -221,8 +226,11 @@ async function GetCharacterScore(selectedOption, charNum){
 
     console.log(character);
 
-    let charScore = character.CalculateScore();
+    //Calculating and displaying each character's score
+    character.CalculateScore();
+    document.getElementById(`result${charNum}`).innerHTML = "SCORE:  " + character.score;
 
+    //Displaying all character attributes in text boxes
     let height = document.getElementById(`height${charNum}`);
     let mass = document.getElementById(`mass${charNum}`);
     let species = document.getElementById(`species${charNum}`);
@@ -240,6 +248,7 @@ async function GetCharacterScore(selectedOption, charNum){
     return character.score;
 }
 
+//Getting character data (SWAPI) 
 async function GetData(URL, charNum){
     return await fetch(URL)
     .then((response) => {
@@ -247,17 +256,22 @@ async function GetData(URL, charNum){
         return response.json();
     }).then(async (data) => {
         console.log(data);
+
+        //Species URL is used to get the species name
         const species = data.species;
         const speciesName = await GetSpecies(species);
 
+        //Returning character object with the first 4 attributes
         character = new Character(data.name, data.height, data.mass, speciesName);
         return character;
     }).catch(error => console.log(error));
 }
 
+//Getting character species (SWAPI) 
 async function GetSpecies(speciesURL){
     let speciesName;
 
+    //SWAPI species for human characters = []
     if(speciesURL.length == 0){
         speciesName = "Human";
         return speciesName;
