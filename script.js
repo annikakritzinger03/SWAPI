@@ -15,7 +15,7 @@ class Character{
         this.mass = mass;
         this.species = species;
 
-        this.traningLvl = 0;
+        this.trainingLvl = 0;
         this.weapon = 0;
         this.skill = 0;
 
@@ -236,7 +236,7 @@ async function GetCharacterScore(selectedOption, charNum){
             break;     
     }
 
-    console.log(character);
+    //console.log(character);
 
     //Calculating and displaying each character's score
     character.CalculateScore();
@@ -260,7 +260,7 @@ async function GetData(URL, charNum){
         if(!response.ok) throw new Error(response.statusText);
         return response.json();
     }).then(async (data) => {
-        console.log(data);
+        //console.log(data);
 
         //Species URL is used to get the species name
         const species = data.species;
@@ -287,8 +287,9 @@ async function GetSpecies(speciesURL){
             if(!speciesResponse.ok) throw new Error(speciesResponse.statusText);
             return speciesResponse.json();
         }).then((speciesData) => {
-            console.log(speciesData);
+            //console.log(speciesData);
             speciesName = speciesData.name;
+            //console.log(speciesName);
             return speciesName;
         }).catch(error => console.log(error));
     }
